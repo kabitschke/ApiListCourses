@@ -1,4 +1,4 @@
-import { getCurso } from "@/api/cursos";
+import { getCurso, getCursos } from "@/api/cursos";
 import Link from "next/link";
 
 type Props = {
@@ -7,7 +7,18 @@ type Props = {
   }
 }
 
+export async function generateStaticParams() {
+  const cursos = await getCursos();
+
+  return cursos.map((curso) => ({
+    curso: curso.slug,
+  }));
+}
+
+
 export default async function CursosPage({ params }: Props) {
+
+
 
   const curso = await getCurso(params.curso);
 

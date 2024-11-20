@@ -1,4 +1,4 @@
-type Curso = {
+export type Curso = {
   id: number;
   slug: string;
   nome: string;
@@ -8,7 +8,7 @@ type Curso = {
 }
 
 
-type Aula = {
+export type Aula = {
   id: number;
   slug: string;
   nome: string;
