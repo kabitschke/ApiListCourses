@@ -1,7 +1,8 @@
 import { getCurso, getCursos } from "@/api/cursos";
+import { Metadata } from "next";
 import Link from "next/link";
 
-type Props = {
+type PageParams = {
   params: {
     curso: string;
   }
@@ -9,14 +10,25 @@ type Props = {
 
 export async function generateStaticParams() {
   const cursos = await getCursos();
-
   return cursos.map((curso) => ({
     curso: curso.slug,
   }));
 }
+//mudança de title de acordo com nome do curso
+export async function generateMetadata({ params }: PageParams) {
+  // se você faz o mesmo fetch no corpo da página, o React irá usar o cache do fetch, evitando requisições duplicadas.
+  const curso = await getCurso(params.curso);
+
+  return {
+    title: curso.nome,
+    description: curso.descricao,
+  };
+}
 
 
-export default async function CursosPage({ params }: Props) {
+
+
+export default async function CursosPage({ params }: PageParams) {
 
 
 

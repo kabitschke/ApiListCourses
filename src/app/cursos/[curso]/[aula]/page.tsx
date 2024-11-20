@@ -19,6 +19,9 @@ export async function generateStaticParams() {
     }));
 }
 
+
+
+
 export default async function AulaPage({ params }: PageParams) {
 
   const aula = await getAula(params.curso, params.aula);
