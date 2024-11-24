@@ -24,14 +24,16 @@ export async function generateStaticParams() {
 
 export default async function AulaPage({ params }: PageParams) {
 
-  const aula = await getAula(params.curso, params.aula);
+  const { aula } = await params;
+  const { curso } = await params;
+  const data = await getAula(curso, aula);
 
   return (
     <div>
-      <Link href={`/cursos/${params.curso}`}>{params.curso}</Link>
-      <h1>{aula.nome}</h1>
-      <p>{aula.descricao}</p>
-      <p>Tempo: {aula.tempo}</p>
+      <Link href={`/cursos/${curso}`}>{curso}</Link>
+      <h1>{data.nome}</h1>
+      <p>{data.descricao}</p>
+      <p>Tempo: {data.tempo}</p>
 
     </div>
   );

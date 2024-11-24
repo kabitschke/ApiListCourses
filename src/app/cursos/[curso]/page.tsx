@@ -18,38 +18,34 @@ export async function generateStaticParams() {
 //mudança de title de acordo com nome do curso
 export async function generateMetadata({ params }: PageParams) {
   // se você faz o mesmo fetch no corpo da página, o React irá usar o cache do fetch, evitando requisições duplicadas.
-  const curso = await getCurso(params.curso);
+  const { curso } = await params;
+  const data = await getCurso(curso);
 
   return {
-    title: curso.nome,
-    description: curso.descricao,
+    title: data.nome,
+    description: data.descricao,
   };
 }
 
-
-
-
 export default async function CursosPage({ params }: PageParams) {
-
-
-
-  const curso = await getCurso(params.curso);
+  const { curso } = await params;
+  const data = await getCurso(curso);
   //caso não encontre o curso é redirecionado para not-found
-  if (curso.error) return notFound();
+  if (data.error) return notFound();
 
 
   return (
     <div>
-      <h1>{curso.nome}</h1>
-      <p>{curso.descricao}</p>
-      <p>Total horas: {curso.total_horas}</p>
-      <p>Total aulas: {curso.total_aulas}</p>
+      <h1>{data.nome}</h1>
+      <p>{data.descricao}</p>
+      <p>Total horas: {data.total_horas}</p>
+      <p>Total aulas: {data.total_aulas}</p>
 
       <h2>Aulas</h2>
 
-      {curso.aulas.map((aula) =>
+      {data.aulas.map((aula) =>
         <ul>
-          <li key={aula.id}><Link href={`/cursos/${params.curso}/${aula.slug}`}>{aula.nome}</Link></li>
+          <li key={aula.id}><Link href={`/cursos/${curso}/${aula.slug}`}>{aula.nome}</Link></li>
         </ul>
       )}
 
