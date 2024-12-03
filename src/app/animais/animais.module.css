@@ -1,0 +1,12 @@
+.animais {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+}
+
+@media (max-width: 600px) {
+  .animais {
+    grid-template-columns: 1fr;
+
+  }
+}

@@ -6,6 +6,8 @@ export default async function Menu() {
     <ul className="menu">
       <li><Link href={`/`}>Home</Link></li>
       <li><Link href={`/cursos`}>Cursos</Link></li>
+      <li><Link href={`/animais`}>Animais</Link></li>
+
     </ul>
   );
 }

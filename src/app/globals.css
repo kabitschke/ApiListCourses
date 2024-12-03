@@ -116,8 +116,14 @@ hr {
   margin: 2rem auto;
 }
 
-video,
+video {
+  max-width: 100%;
+  display: block;
+}
+
 img {
+  width: auto;
+  height: auto;
   max-width: 100%;
   display: block;
 }
